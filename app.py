@@ -8,16 +8,16 @@ app = Flask(__name__)
 CORS(app)
 
 # Load trained models
-nb_model = joblib.load("naive_bayes_model.pkl")
-encoder = joblib.load("encoder.pkl")
-scaler = joblib.load("scaler.pkl")
+nb_model = joblib.load("models/naive_bayes_model.pkl")
+encoder = joblib.load("models/encoder.pkl")
+scaler = joblib.load("models/scaler.pkl")
 
 # Use **correct feature names** from training time!
 expected_features = ["Credit/Debit", "Transaction Type"]
 
 
 # Load trained model
-model = joblib.load("random_forest_model.pkl")
+model = joblib.load("models/random_forest_model.pkl")
 
 # Prediction endpoint
 @app.route("/predict_expense", methods=["POST"])
