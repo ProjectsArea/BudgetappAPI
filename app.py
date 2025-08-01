@@ -7,10 +7,13 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-# Load trained models
-nb_model = joblib.load("models/naive_bayes_model.pkl")
-encoder = joblib.load("models/encoder.pkl")
-scaler = joblib.load("models/scaler.pkl")
+import pickle
+with open("naive_bayes_model.pkl", "rb") as f:
+    nb_model = pickle.load(f)
+with open("encoder.pkl", "rb") as f:
+    encoder = pickle.load(f)
+with open("scaler.pkl", "rb") as f:
+    scaler = pickle.load(f)
 
 # Use **correct feature names** from training time!
 expected_features = ["Credit/Debit", "Transaction Type"]
