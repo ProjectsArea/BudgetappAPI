@@ -6,23 +6,11 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
-
-# Load trained models
-import boto3
-import io
-
-s3 = boto3.client("s3")
-bucket = "zappa-expense-app-bucket"
-
-def load_model_from_s3(key):
-    response = s3.get_object(Bucket=bucket, Key=f"models/{key}")
-    return joblib.load(io.BytesIO(response['Body'].read()))
-
 # Load models from S3
-model = load_model_from_s3("random_forest_model.pkl")
-nb_model = load_model_from_s3("naive_bayes_model.pkl")
-encoder = load_model_from_s3("encoder.pkl")
-scaler = load_model_from_s3("scaler.pkl")
+model = ("random_forest_model.pkl")
+nb_model = ("naive_bayes_model.pkl")
+encoder = ("encoder.pkl")
+scaler = ("scaler.pkl")
 expected_features = ["Credit/Debit", "Transaction Type"]
 # Prediction endpoint
 @app.route("/predict_expense", methods=["POST"])
